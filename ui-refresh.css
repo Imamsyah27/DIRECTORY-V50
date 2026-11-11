@@ -1,0 +1,102 @@
+
+/* UI REFRESH 2026 — polish, motion, clarity. Logic/layout structure remains untouched. */
+:root{
+  --ui-ease:cubic-bezier(.2,.75,.25,1);
+  --ui-ring:0 0 0 3px color-mix(in srgb,var(--primary) 22%,transparent);
+}
+html{scroll-padding-top:90px}
+body{ text-rendering:optimizeLegibility }
+button,[role="button"],a,.tab,.nav-items button,.nav-toggle{
+  -webkit-tap-highlight-color:transparent;
+}
+button{
+  transition:transform .2s var(--ui-ease),box-shadow .22s var(--ui-ease),
+    background-color .2s ease,border-color .2s ease,color .2s ease,filter .2s ease;
+}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:0;box-shadow:var(--ui-ring)!important;
+}
+button:not(:disabled):active{transform:translateY(1px) scale(.985)}
+.app-shell{padding-bottom:40px}
+header.app-header{
+  backdrop-filter:blur(20px) saturate(170%);
+  -webkit-backdrop-filter:blur(20px) saturate(170%);
+  box-shadow:0 8px 30px rgba(20,35,65,.07);
+}
+.brand-mark{position:relative;isolation:isolate;overflow:hidden}
+.brand-mark:after{
+  content:"";position:absolute;inset:-60%;z-index:-1;
+  background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.42),transparent 65%);
+  transform:translateX(-80%);animation:ui-shine 7s ease-in-out infinite;
+}
+@keyframes ui-shine{0%,65%,100%{transform:translateX(-80%)}80%{transform:translateX(80%)}}
+.nav-items button,.nav-toggle,.page-nav button{
+  transition:all .22s var(--ui-ease);
+}
+.nav-items button:hover,.nav-toggle:hover,.page-nav button:hover{
+  transform:translateY(-1px);filter:saturate(1.08);
+}
+.nav-items button.active,.page-nav button.active{
+  box-shadow:0 5px 14px color-mix(in srgb,var(--primary) 22%,transparent);
+}
+.panel,.stat-card,.auth-card,.modal-content,.modal-box,.card,.form-card{
+  transition:box-shadow .25s var(--ui-ease),border-color .25s ease,transform .25s var(--ui-ease);
+}
+.panel{
+  border:1px solid color-mix(in srgb,var(--border) 78%,transparent);
+  box-shadow:0 3px 14px rgba(20,35,65,.035);
+}
+.panel:hover{box-shadow:0 10px 28px rgba(20,35,65,.075)}
+.stat-card{
+  position:relative;overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--border) 78%,transparent);
+  box-shadow:0 4px 16px rgba(20,35,65,.045);
+}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(20,35,65,.11)}
+.stat-card:after{
+  content:"";position:absolute;width:110px;height:110px;border-radius:50%;
+  right:-48px;top:-55px;background:color-mix(in srgb,var(--primary) 7%,transparent);
+  pointer-events:none;transition:transform .35s var(--ui-ease);
+}
+.stat-card:hover:after{transform:scale(1.35)}
+button[class*="btn"],.btn,.tab,.action-btn{
+  border-radius:10px;
+}
+button[class*="btn"]:not(:disabled):hover,.btn:not(:disabled):hover,.action-btn:not(:disabled):hover{
+  transform:translateY(-2px);filter:brightness(1.035);
+  box-shadow:0 7px 18px rgba(30,55,100,.13);
+}
+input,select,textarea{
+  transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+}
+input:hover,select:hover,textarea:hover{border-color:color-mix(in srgb,var(--primary) 48%,var(--border))}
+input:focus,select:focus,textarea:focus{border-color:var(--primary)!important}
+table tbody tr{transition:background-color .16s ease}
+table tbody tr:hover{transform:translateZ(0)}
+.modal,.modal-overlay,[class*="modal"]{
+  -webkit-backdrop-filter:blur(7px);
+  backdrop-filter:blur(7px);
+}
+.modal-content,.modal-box{
+  animation:ui-pop .24s var(--ui-ease) both;
+}
+@keyframes ui-pop{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+.view-section,.page-section,[id^="view-"]{animation:ui-enter .3s var(--ui-ease) both}
+@keyframes ui-enter{from{opacity:.55;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.badge-count{transition:transform .2s ease}
+.badge-count:not(:empty){animation:ui-badge .35s var(--ui-ease)}
+@keyframes ui-badge{from{transform:scale(.75)}to{transform:scale(1)}}
+::-webkit-scrollbar-thumb{border:2px solid transparent;background-clip:padding-box}
+::selection{background:color-mix(in srgb,var(--primary) 28%,transparent)}
+@media(max-width:760px){
+ body{padding-bottom:28px}
+ .app-shell{padding-left:12px!important;padding-right:12px!important}
+ header.app-header{gap:10px}
+ .panel{padding:15px!important}
+ .stat-card:hover,.panel:hover{transform:none}
+ button{min-height:38px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;
+ animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
